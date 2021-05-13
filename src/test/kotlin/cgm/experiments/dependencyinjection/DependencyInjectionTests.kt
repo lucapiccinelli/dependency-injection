@@ -52,11 +52,27 @@ class DependencyInjectionTests {
     }
 
     @Test
+    fun `test creation of an interface with no dependency`(){
+        DependencyInjection.addI<IDependency, Dependency>()
+
+        DependencyInjection.get<IDependency>() shouldBe Dependency()
+    }
+
+    @Test
     fun `test creation of a class by factory function`() {
         DependencyInjection.add { Dependent(Dependency()) }
 
         val expected = Dependent(Dependency())
         DependencyInjection.get<Dependent>() shouldBe expected
+    }
+
+    @Test
+    fun `test creation of an interface with nested dependencies`(){
+        DependencyInjection.addI<INested, Nested>()
+        DependencyInjection.addI<IDependency, Dependency>()
+
+        val expected = Nested(Dependency())
+        DependencyInjection.get<INested>() shouldBe expected
     }
 
     @Test
@@ -66,6 +82,14 @@ class DependencyInjectionTests {
 
         val expected = Dependent(Dependency())
         DependencyInjection.get<Dependent>() shouldBe expected
+    }
+
+    @Test
+    fun `test dependency injection autoconfiguration`(){
+        diAutoConfigure("cgm.experiments.dependencyinjection")
+
+        val expected = Nested(Dependency())
+        DependencyInjection.get<INested>() shouldBe expected
     }
 
     @Test
@@ -81,27 +105,6 @@ class DependencyInjectionTests {
     }
 
     @Test
-    fun `test creation of an interface with no dependency`(){
-        di {
-            addI<IDependency, Dependency>()
-
-            get<IDependency>() shouldBe Dependency()
-        }
-
-    }
-
-    @Test
-    fun `test creation of an interface with nested dependencies`(){
-        di {
-            addI<INested, Nested>()
-            addI<IDependency, Dependency>()
-
-            val expected = Nested(Dependency())
-            get<INested>() shouldBe expected
-        }
-    }
-
-    @Test
     fun `test creation of an interface with factory functions`(){
         di {
             add<INested> { Nested(get()!!) }
@@ -110,14 +113,6 @@ class DependencyInjectionTests {
             val expected = Nested(Dependency())
             get<INested>() shouldBe expected
         }
-    }
-
-    @Test
-    fun `test dependency injection autoconfiguration`(){
-        diAutoConfigure("com.example.di.tests")
-
-        val expected = Nested(Dependency())
-        di { get<INested>() } shouldBe expected
     }
 }
 

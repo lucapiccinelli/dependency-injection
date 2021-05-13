@@ -1,7 +1,7 @@
 package cgm.experiments.dependencyinjection
 
 object DependencyInjection {
-    inline fun <reified T> get(): T {
+    inline fun <reified T> get(): T? {
         TODO("Not yet implemented")
     }
 
@@ -9,7 +9,16 @@ object DependencyInjection {
         TODO("Not yet implemented")
     }
 
+    fun <T> add(clazz: Class<T>) {
+        TODO("Not yet implemented")
+    }
+
+
     inline fun <reified T: Any, reified U: T> addI() {
+        TODO("Not yet implemented")
+    }
+
+    fun <T: Any, U: T> addI(interfaze: Class<T>, clazz: Class<U>) {
         TODO("Not yet implemented")
     }
 
