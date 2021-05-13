@@ -1,5 +1,7 @@
 package cgm.experiments.dependencyinjection
 
+import kotlin.reflect.KClass
+
 object DependencyInjection {
     inline fun <reified T> get(): T? {
         TODO("Not yet implemented")
@@ -9,7 +11,7 @@ object DependencyInjection {
         TODO("Not yet implemented")
     }
 
-    fun <T> add(clazz: Class<T>) {
+    fun <T: Any> add(clazz: KClass<T>) {
         TODO("Not yet implemented")
     }
 
@@ -18,7 +20,7 @@ object DependencyInjection {
         TODO("Not yet implemented")
     }
 
-    fun <T: Any, U: T> addI(interfaze: Class<T>, clazz: Class<U>) {
+    fun <T: Any, U: T> addI(interfaze: KClass<T>, clazz: KClass<U>) {
         TODO("Not yet implemented")
     }
 
