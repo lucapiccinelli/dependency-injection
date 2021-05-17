@@ -30,10 +30,10 @@ class DependencyInjectionTests {
 
     @Test
     fun `test creation of a class with more then one dependency`() {
-        DependencyInjection.add<Dependency>()
         DependencyInjection.add<Dependency2>()
         DependencyInjection.add<Dependent>()
         DependencyInjection.add<Dependent2>()
+        DependencyInjection.add<Dependency>()
 
         val expected = Dependent2(Dependency2(), Dependency())
         DependencyInjection.get<Dependent2>() shouldBe expected

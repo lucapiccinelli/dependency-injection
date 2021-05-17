@@ -1,6 +1,6 @@
 package cgm.experiments.dependencyinjection
 
-import com.example.di.annotation.Injected
+import cgm.experiments.dependencyinjection.annotation.Injected
 
 
 interface IDependency

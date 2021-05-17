@@ -1,3 +1,3 @@
-package com.example.di.annotation
+package cgm.experiments.dependencyinjection.annotation
 
-annotation class Injected()
+annotation class Injected
